@@ -1,0 +1,453 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.screen {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0;
+    margin-top: 20px; /* Espaço abaixo do menu */
+}
+
+h1, h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ccc;
+}
+
+.btn.primary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn.primary:hover {
+    background-color: #45a049;
+}
+
+.products-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 200px;
+    position: relative;
+}
+
+.product-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: scale-down;
+    border-radius: 4px;
+}
+
+.product-card .product-info {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.product-card .delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* Edit Screen Styles */
+.menu-area {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+.menu li button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.menu li button:hover {
+    text-decoration: underline;
+}
+
+.edit-content {
+    display: flex;
+    gap: 20px;
+}
+
+/* Ajuste na altura do conteúdo das telas */
+.config-content,
+.edit-content {
+    margin-top: 10px;
+}
+
+.shopping-list-area {
+    width: 30%;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.selection-area {
+    width: 70%;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.selection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.search-area {
+    margin-bottom: 15px;
+}
+
+.search-area input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.favorite-filters {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+
+.favorite-filter {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.favorite-filter:hover {
+    background-color: #d0d0d0;
+}
+
+.filtered-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    max-height: calc(100vh - 400px);
+    overflow-y: auto;
+    padding: 10px 0;
+}
+
+.item-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: scale-down;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.item-info {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-controls input {
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.quantity-btn {
+    width: 25px;
+    height: 25px;
+    border: none;
+    background-color: #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background-color: #45a049;
+}
+
+/* Shopping List Styles */
+.environment-group {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.environment-header {
+    background-color: #e0e0e0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.environment-items {
+    padding: 10px;
+    background-color: white;
+}
+
+.environment-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.environment-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.environment-item img {
+    width: 25%;
+    height: 60px;
+    object-fit: scale-down;
+    border-radius: 4px;
+}
+
+.environment-item-details {
+    width: 70%;
+}
+
+.edit-environment-btn {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.toggle-environment-btn {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+/* Estilo para o botão de deletar item */
+.delete-item-btn {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 2px 5px;
+    margin-top: 5px;
+}
+
+.delete-item-btn:hover {
+    color: #cc0000;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+}
+
+.modal-content.large {
+    width: 800px;
+    max-width: 90%;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Ajuste no modal buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#json-data {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-family: monospace;
+}
+
+/* Print Styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #print-content, #print-content * {
+        visibility: visible;
+    }
+    #print-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .print-section {
+        page-break-after: always;
+        margin-bottom: 40px;
+    }
+    .print-section:last-child {
+        page-break-after: avoid;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+}
