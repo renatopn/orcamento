@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="item-info">${product.code} - ${product.desc}</span>
                 <div class="quantity-controls">
                     <button class="quantity-btn minus">-</button>
-                    <input type="number" min="1" value="1" class="quantity-input">
+                    <input type="number" min="0" value="0" class="quantity-input">
                     <button class="quantity-btn plus">+</button>
                 </div>
                 <button class="add-btn" data-code="${product.code}">Adicionar</button>
@@ -243,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (searchText && filteredItems.children.length > 0 && !favoriteFilterTexts.has(searchText)) {
                     addFavoriteFilter(searchText);
                 }
+                quantityInput.value = 0;
             });
         });
     }
