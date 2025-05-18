@@ -347,6 +347,7 @@ h1, h2 {
 }
 
 /* Estilo para o botão de deletar item */
+.delete-item-btn,
 .delete-item-btn {
     background: none;
     border: none;
@@ -355,7 +356,7 @@ h1, h2 {
     padding: 2px 5px;
     margin-top: 5px;
 }
-
+.delete-item-btn,
 .delete-item-btn:hover {
     color: #cc0000;
 }
