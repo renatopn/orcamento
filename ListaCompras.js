@@ -262,6 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (existingItemIndex >= 0) {
             // Atualizar quantidade se o produto já existir
             shoppingData[currentEnvironment][existingItemIndex].quantity += quantity;
+            shoppingData[currentEnvironment][existingItemIndex].lastAdded = quantity;
         } else {
             // Adicionar novo item
             shoppingData[currentEnvironment].push({
@@ -381,6 +382,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="environment-item-details">
                         <div>${item.code} - ${item.desc}</div>
                         <div>Quantidade: ${item.quantity}</div>
+                        ${item.lastAdded && item.lastAdded > 0 ? `
+                            <div>Último : ${item.lastAdded}
+                                <button class="revert-item-btn" data-env="${envName}" data-code="${item.code}" data-lastAdded="${item.lastAdded}">↩</button>
+                            </div>
+                        ` : ''}
                     </div>
                     <button class="delete-item-btn" data-env="${envName}" data-code="${item.code}">🗑️</button>
                 `;
@@ -396,6 +402,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     shoppingData[env] = shoppingData[env].filter(item => item.code !== code);
                   
+                    renderShoppingList();
+                });
+            });
+
+            // Adicionar event listeners para os botões de deletar
+            envItems.querySelectorAll('.revert-item-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const env = this.getAttribute('data-env');
+                    const code = this.getAttribute('data-code');
+                    const lastAdded = this.getAttribute('data-lastAdded');
+                    const item = shoppingData[env].find(item => item.code === code);
+                    if (!item) return;
+                    const newQuantity = item.quantity - parseInt(lastAdded);
+                    if (newQuantity < 0) {
+                        alert('Quantidade não pode ser negativa');
+                        return;
+                    }
+                    item.quantity = newQuantity;
+                    item.lastAdded = null;
+                    if (newQuantity === 0) {
+                        shoppingData[env] = shoppingData[env].filter(item => item.code !== code);
+                    }
+                    
                     renderShoppingList();
                 });
             });
