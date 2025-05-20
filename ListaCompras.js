@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const configProductsBtn = document.getElementById('config-products-btn');
     const editDataBtn = document.getElementById('edit-data-btn');
     const saveCookiesBtn = document.getElementById('save-cookies-btn');
+    const deleteCookiesBtn = document.getElementById('delete-cookies-btn');
     const loadCookiesBtn = document.getElementById('load-cookies-btn');
     const printBtn = document.getElementById('print-btn');
     const shoppingListArea = document.getElementById('shopping-list-area');
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     configProductsBtn.addEventListener('click', showConfigScreen);
     editDataBtn.addEventListener('click', showEditDataModal);
     saveCookiesBtn.addEventListener('click', saveToCookies);
+    deleteCookiesBtn.addEventListener('click', deleteCookies);
     loadCookiesBtn.addEventListener('click', loadFromCookies);
     printBtn.addEventListener('click', printShoppingList);
     finishEnvironmentBtn.addEventListener('click', finishEnvironment);
@@ -531,6 +533,11 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Dados salvos em cookies com sucesso!');
     }
 
+    function deleteCookies() {
+        document.cookie = "shoppingListData=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        alert('Dados apagados dos cookies!');
+    }
+
     function loadFromCookies() {
         const cookies = document.cookie.split('; ');
         const dataCookie = cookies.find(c => c.startsWith('shoppingListData='));
@@ -571,6 +578,7 @@ document.addEventListener('DOMContentLoaded', function() {
             shoppingData[envName].forEach(item => {
                 if (!reducedList[item.code]) {
                     reducedList[item.code] = {
+                        url: item.url,
                         code: item.code,
                         desc: item.desc,
                         total: 0,
@@ -595,8 +603,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     body { font-family: Arial, sans-serif; margin: 20px; }
                     h1, h2 { color: #333; }
                     table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-                    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                    th, td { border: 1px solid #ddd; padding: 2px; text-align: left; }
                     th { background-color: #f2f2f2; }
+                    img { height: 60px;  object-fit: scale-down; border-radius: 4px; }
                     .print-section { page-break-after: always; margin-bottom: 40px; }
                     .print-section:last-child { page-break-after: avoid; }
                 </style>
@@ -609,6 +618,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <thead>
                                 <tr>
                                     <th>Ordem</th>
+                                    <th>Imagem</th>
                                     <th>Código</th>
                                     <th>Descrição</th>
                                     <th>Quantidade Total</th>
@@ -624,6 +634,7 @@ document.addEventListener('DOMContentLoaded', function() {
             printHTML += `
                 <tr>
                     <td>${order++}</td>
+                    <td><img src="${item.url}"></td>
                     <td>${item.code}</td>
                     <td>${item.desc}</td>
                     <td>${item.total}</td>
