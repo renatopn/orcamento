@@ -603,11 +603,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     body { font-family: Arial, sans-serif; margin: 20px; }
                     h1, h2 { color: #333; }
                     table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-                    th, td { border: 1px solid #ddd; padding: 2px; text-align: left; }
+                    th, td { border: 1px solid #ddd; padding: 2px; text-align: center; }
                     th { background-color: #f2f2f2; }
                     img { height: 60px;  object-fit: scale-down; border-radius: 4px; }
                     .print-section { page-break-after: always; margin-bottom: 40px; }
                     .print-section:last-child { page-break-after: avoid; }
+                    .td-desc:nth-child(4) { text-align: left;}
                 </style>
             </head>
             <body>
@@ -633,11 +634,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const item = reducedList[code];
             printHTML += `
                 <tr>
-                    <td>${order++}</td>
-                    <td><img src="${item.url}"></td>
-                    <td>${item.code}</td>
-                    <td>${item.desc}</td>
-                    <td>${item.total}</td>
+                    <td class="td-desc">${order++}</td>
+                    <td class="td-desc"><img src="${item.url}"></td>
+                    <td class="td-desc">${item.code}</td>
+                    <td class="td-desc">${item.desc}</td>
+                    <td class="td-desc">${item.total}</td>
                 </tr>
             `;
         }
